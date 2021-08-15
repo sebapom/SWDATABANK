@@ -37,6 +37,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			getPeople: () => {
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+
+				fetch("https://swapi.dev/api/people", requestOptions)
+					.then(response => response.json())
+					.then(result => {
+						console.log(JSON.stringify(result));
+						setStore({ peopleOfStarWars: result });
+					})
+					.catch(error => {
+						console.log("error", error);
+					});
 			}
 		}
 	};
